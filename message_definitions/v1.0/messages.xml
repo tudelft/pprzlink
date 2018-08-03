@@ -155,8 +155,12 @@
     </message>
 
     <message name="ADC_GENERIC" id="18">
-      <field name="val1" type="uint16"/>
-      <field name="val2" type="uint16"/>
+      <field name="adc1" type="uint16"/>
+      <field name="adc2" type="uint16"/>
+      <field name="adc3" type="uint16"/>
+      <field name="adc4" type="uint16"/>
+      <field name="servo_pitch" type="uint16" alt_unit="%" alt_unit_coef="0.01"/>
+      <field name="servo_yaw" type="uint16" alt_unit="%" alt_unit_coef="0.01"/>
     </message>
 
     <message name="ECU" id="19">
@@ -290,7 +294,8 @@
     </message>
 
     <message name="MOTOR" id="34">
-      <field name="rpm" type="uint16" unit="Hz"/>
+      <field name="rpm_left" type="uint16" unit="RPM"/>
+      <field name="rpm_right" type="uint16" unit="RPM"/>
       <field name="current" type="int32" unit="mA"/>
     </message>
 
@@ -384,18 +389,7 @@
       <field name="alt" type="int32" unit="mm" alt_unit="m">Height above Mean Sea Level (geoid)</field>
     </message>
 
-    <message name="RLFILTER" id="48">
-      <description>Relative localization data for other tracked MAVs in terms of x y and z in the body axis</description>
-      <field name="trackedID"      type="int32"    unit=""/>
-      <field name="rangearray"     type="float" unit="dB"/>
-      <field name="x_tracked"  type="float"    unit="m/s"/>
-      <field name="y_tracked"  type="float"    unit="m/s"/>
-      <field name="vx_own"     type="float"    unit="m/s"/>
-      <field name="vy_own"     type="float"    unit="m/s"/>
-      <field name="vx_tracked" type="float"    unit="m/s"/>
-      <field name="vy_tracked" type="float"    unit="m/s"/>
-      <field name="z_pos"      type="float"    unit="m"/>
-    </message>
+    <!-- 48 is free -->
 
     <message name="WP_MOVED_ENU" id="49">
       <field name="wp_id" type="uint8"/>
@@ -449,18 +443,7 @@
       <field name="scaled" type="float"/>
     </message>
 
-    <message name="VISION_OUTBACK" id="58">
-      <field name="status" type="uint8"/>
-      <field name="het_moment" type="uint8"/>
-      <field name="timeoutcount" type="uint8"/>
-      <field name="vision_timeout" type="uint8"/>
-      <field name="height" type="float"/>
-      <field name="out_of_range" type="float"/>
-      <field name="marker_enu_x" type="float"/>
-      <field name="marker_enu_y" type="float"/>
-      <field name="flow_x" type="float"/>
-      <field name="flow_y" type="float"/>
-    </message>
+    <!-- 58 is free -->
 
     <message name="GPS_LLA" id="59">
       <field name="lat"        type="int32"  unit="1e7deg" alt_unit="deg" alt_unit_coef="0.0000001"/>
@@ -612,7 +595,15 @@
       <field name="GX3_chksm"	type="uint16"/>
     </message>
 
-    <!-- 74 is free -->
+    <message name="DELFLY_VISION" id="74">
+      <field name="gate_quality" type="uint8"/>
+      <field name="gate_width"   type="float" unit="rad"/>
+      <field name="gate_height"  type="float" unit="rad"/>
+      <field name="gate_psi"     type="float" unit="rad"/>
+      <field name="gate_theta"   type="float" unit="rad"/>
+      <field name="gate_depth"   type="float" unit="m"/>
+    </message>
+
     <!-- 75 is free -->
     <!-- 76 is free -->
     <!-- 77 is free -->
@@ -1368,12 +1359,6 @@
       <field name="zdd"            type="float"/>
       <field name="bias"           type="float"/>
       <field name="offset"         type="float"/>
-      <field name="obs_height"     type="float"/>
-      <field name="Pzz"            type="float"/>
-      <field name="Pzdzd"          type="float"/>
-      <field name="Pbb"            type="float"/>
-      <field name="Poffsetoffset"  type="float"/>
-      <field name="Pobsobs"        type="float"/>
     </message>
 
     <message name="VFF" id="162">
@@ -1691,13 +1676,19 @@
       <field name="gspeed"   type="uint16" unit="cm/s" alt_unit="m/s"/>
     </message>
 
-    <message name="DELFLY_VISION" id="218">
-      <field name="gate_quality" type="uint8"/>
-      <field name="gate_width"   type="float" unit="rad"/>
-      <field name="gate_height"  type="float" unit="rad"/>
-      <field name="gate_psi"     type="float" unit="rad"/>
-      <field name="gate_theta"   type="float" unit="rad"/>
-      <field name="gate_depth"   type="float" unit="m"/>
+    <message name="BEBOP_ACTUATORS" id="218">
+      <field name="cmd_thrust" type="int32"/>
+      <field name="cmd_roll" type="int32"/>
+      <field name="cmd_pitch" type="int32"/>
+      <field name="cmd_yaw" type="int32"/>
+      <field name="rpm_ref_lf" type="uint16" unit="rpm"/>
+      <field name="rpm_ref_rf" type="uint16" unit="rpm"/>
+      <field name="rpm_ref_rb" type="uint16" unit="rpm"/>
+      <field name="rpm_ref_lb" type="uint16" unit="rpm"/>
+      <field name="rpm_obs_lf" type="uint16" unit="rpm"/>
+      <field name="rpm_obs_rf" type="uint16" unit="rpm"/>
+      <field name="rpm_obs_rb" type="uint16" unit="rpm"/>
+      <field name="rpm_obs_lb" type="uint16" unit="rpm"/>
     </message>
 
     <message name="WEATHER" id="219">
@@ -1780,18 +1771,7 @@
       <field name="image_data" type="uint8[]"/>
     </message>
 
-    <message name="ROVER_STATUS" id="230">
-      <description>
-        Rover status message
-      </description>
-      <field name="rc_status"    type="uint8" values="OK|LOST|REALLY_LOST"/>
-      <field name="frame_rate"   type="uint8" unit="Hz"/>
-      <field name="gps_status"   type="uint8" values="NO_FIX|NA|2D|3D|DGPS|RTK"/>
-      <field name="ap_mode"      type="uint8">Rover AP modes are generated from XML file</field>
-      <field name="ap_motors_on" type="uint8" values="MOTORS_OFF|MOTORS_ON"/>
-      <field name="vsupply"      type="uint16" unit="decivolt"/>
-      <field name="cpu_time"     type="uint16" unit="s"/>
-    </message>
+    <!-- 230 is free -->
 
     <message name="ROTORCRAFT_STATUS" id="231">
       <field name="link_imu_nb_err" type="uint32"/>
@@ -3036,24 +3016,14 @@
       <field name="heightObject"   		type="uint8"/>
       <field name="distanceToObject"    type="uint8"/>
     </message>
-    
-    <message name="STEREOCAM_GATE" id="84">
-      <description>Result of the gate detection algorithm on the stereocamera</description>
-      <field name="quality" type="uint8">Measure of how certainty of gate identificaiton, min 15, max 100</field>
-      <field name="width" 	type="float" unit="rad"/>
-      <field name="hieght"  type="float" unit="rad"/>
-      <field name="phi"     type="float" unit="rad">Bearing of the gate in the camera frame</field>
-      <field name="theta"   type="float" unit="rad"/>
-      <field name="depth"   type="float" unit="m">Set to 0 is not known</field>
-    </message>
 
     <message name="IMCU_DATALINK" id="113">
-      <description>Forward FBW datalink to AP</description>
+     <description>Forward FBW datalink to AP</description>
       <field name="msg" type="uint8[]"/>
     </message>
 
     <message name="IMCU_TELEMETRY" id="114">
-      <description>Forward AP telemetry to FBW</description>
+      <field name="msg_id" type="uint8"/>
       <field name="msg" type="uint8[]"/>
     </message>
 
