@@ -1692,12 +1692,12 @@
     </message>
 
     <message name="DELFLY_VISION" id="218">
-      <field name="quality" type="uint8"/>
-      <field name="width"   type="float" unit="rad"/>
-      <field name="hieght"  type="float" unit="rad"/>
-      <field name="phi"     type="float" unit="rad"/>
-      <field name="theta"   type="float" unit="rad"/>
-      <field name="depth"   type="float" unit="m"/>
+      <field name="gate_quality" type="uint8"/>
+      <field name="gate_width"   type="float" unit="rad"/>
+      <field name="gate_height"  type="float" unit="rad"/>
+      <field name="gate_psi"     type="float" unit="rad"/>
+      <field name="gate_theta"   type="float" unit="rad"/>
+      <field name="gate_depth"   type="float" unit="m"/>
     </message>
 
     <message name="WEATHER" id="219">
