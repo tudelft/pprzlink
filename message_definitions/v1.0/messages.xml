@@ -1691,19 +1691,13 @@
       <field name="gspeed"   type="uint16" unit="cm/s" alt_unit="m/s"/>
     </message>
 
-    <message name="BEBOP_ACTUATORS" id="218">
-      <field name="cmd_thrust" type="int32"/>
-      <field name="cmd_roll" type="int32"/>
-      <field name="cmd_pitch" type="int32"/>
-      <field name="cmd_yaw" type="int32"/>
-      <field name="rpm_ref_lf" type="uint16" unit="rpm"/>
-      <field name="rpm_ref_rf" type="uint16" unit="rpm"/>
-      <field name="rpm_ref_rb" type="uint16" unit="rpm"/>
-      <field name="rpm_ref_lb" type="uint16" unit="rpm"/>
-      <field name="rpm_obs_lf" type="uint16" unit="rpm"/>
-      <field name="rpm_obs_rf" type="uint16" unit="rpm"/>
-      <field name="rpm_obs_rb" type="uint16" unit="rpm"/>
-      <field name="rpm_obs_lb" type="uint16" unit="rpm"/>
+    <message name="DELFLY_VISION" id="218">
+      <field name="quality" type="uint8"/>
+      <field name="width"   type="float" unit="rad"/>
+      <field name="hieght"  type="float" unit="rad"/>
+      <field name="phi"     type="float" unit="rad"/>
+      <field name="theta"   type="float" unit="rad"/>
+      <field name="depth"   type="float" unit="m"/>
     </message>
 
     <message name="WEATHER" id="219">
