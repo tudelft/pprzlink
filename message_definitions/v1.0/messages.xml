@@ -3022,6 +3022,25 @@
       <field name="heightObject"   		type="uint8"/>
       <field name="distanceToObject"    type="uint8"/>
     </message>
+    
+    <message name="STEREOCAM_GATE" id="84">
+      <description>Result of the gate detection algorithm on the stereocamera</description>
+      <field name="quality" type="uint8">Measure of how certainty of gate identificaiton, min 15, max 100</field>
+      <field name="width" 	type="float" unit="rad"/>
+      <field name="hieght"  type="float" unit="rad"/>
+      <field name="phi"     type="float" unit="rad">Bearing of the gate in the camera frame</field>
+      <field name="theta"   type="float" unit="rad"/>
+      <field name="depth"   type="float" unit="m">Set to 0 is not known</field>
+    </message>
+    
+    <message name="STEREOCAM_DROPLET" id="85">
+      <description>Result of the Droplet avoidance algorithm</description>
+      <field name="disparities_high" type="uint32">Num pixs with high disparity</field>
+      <field name="processed_pixels" 	type="uint32">Total pixels with enough texture to be processed</field>
+      <field name="hist_obs_sum"  type="uint32"></field>
+      <field name="count_disps_left"    type="uint32">Number of pixels with high disparity in the left half of the frame</field>
+      <field name="count_disps_right"   type="uint32">Number of pixels with high disparity in the right half of the frame</field>
+    </message>
 
 	<message name="STEREOCAM_GATE" id="84">
       <description>Result of the gate detection algorithm on the stereocamera</description>
