@@ -608,7 +608,14 @@
       <field name="att_sp_theta" type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="att_sp_psi"   type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="thrust_sp"    type="float" unit="m/s"/>
-    </message>
+      <field name="laser_alt"   type="float" unit="m"/>
+      <field name="baro_alt"   type="float" unit="m"/>
+      <field name="fused_alt"   type="float" unit="m"/>
+      <field name="climb_rate"   type="float" unit="m/s"/>
+      <field name="laser_rate"   type="float" unit="m/s"/>
+      <field name="line_psi"   type="float" unit="rad"/>
+      <field name="obstacle_psi"   type="float" unit="rad"/>
+      	   	</message>
 
     <!-- 75 is free -->
     <!-- 76 is free -->
