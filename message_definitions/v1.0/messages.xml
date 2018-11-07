@@ -3038,6 +3038,7 @@
       <field name="phi"     type="float" unit="rad">Bearing of the gate in the camera frame</field>
       <field name="theta"   type="float" unit="rad"/>
       <field name="depth"   type="float" unit="m">Set to 0 is not known</field>
+      <field name="color_bins" type="uint16[]"/>
     </message>
     
     <message name="IMCU_DATALINK" id="113">
