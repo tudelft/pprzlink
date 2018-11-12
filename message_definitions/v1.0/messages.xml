@@ -3040,6 +3040,16 @@
       <field name="depth"   type="float" unit="m">Set to 0 is not known</field>
       <field name="color_bins" type="uint16[]"/>
     </message>
+
+    <message name="STEREOCAM_LINE" id="85">
+      <description>Result of the line detection algorithm on the stereocamera</description>
+      <field name="fit" type="int32">Measure of how certainty of line identificaiton</field>
+      <field name="phi_line"     type="float" unit="rad">Bearing of the line in the camera frame</field>
+      <field name="theta_line"   type="float" unit="rad"/>
+      <field name="rotation"   type="float" unit="rad"/>
+      <field name="phi_obstacle"     type="float" unit="rad">Bearing of the line in the camera frame</field>
+      <field name="theta_obstacle"   type="float" unit="rad"/>
+    </message>
     
     <message name="IMCU_DATALINK" id="113">
      <description>Forward FBW datalink to AP</description>
