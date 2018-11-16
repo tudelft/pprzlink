@@ -3041,12 +3041,22 @@
       <field name="color_bins" type="uint16[]"/>
     </message>
 
-    <message name="STEREOCAM_LINE" id="85">
+<!--    <message name="STEREOCAM_LINE" id="85">
       <description>Result of the line detection algorithm on the stereocamera</description>
       <field name="fit" type="int32">Measure of how certainty of line identificaiton</field>
       <field name="phi_line"     type="float" unit="rad">Bearing of the line in the camera frame</field>
       <field name="theta_line"   type="float" unit="rad"/>
       <field name="rotation"   type="float" unit="rad"/>
+      <field name="phi_obstacle"     type="float" unit="rad">Bearing of the line in the camera frame</field>
+      <field name="theta_obstacle"   type="float" unit="rad"/>
+    </message>
+    -->
+    <message name="STEREOCAM_LINE" id="85">
+      <description>Result of the line detection algorithm on the stereocamera</description>
+      <field name="r2" type="float">Measure of how certainty of line identificaiton</field>
+      <field name="A"  type="float" unit="rad"> Quadratic coefficient of the second order fitted polynomial</field>
+      <field name="B"  type="float" unit="rad"> Lienar coefficient of the second order fitted polynomial</field>
+      <field name="C"  type="float" unit="rad"> Constant coefficient of the second order fitted polynomial</field>
       <field name="phi_obstacle"     type="float" unit="rad">Bearing of the line in the camera frame</field>
       <field name="theta_obstacle"   type="float" unit="rad"/>
     </message>
