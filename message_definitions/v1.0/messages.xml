@@ -595,15 +595,7 @@
       <field name="GX3_chksm"	type="uint16"/>
     </message>
 
-    <message name="DELFLY_VISION" id="74">
-      <field name="gate_quality" type="uint8"/>
-      <field name="gate_width"   type="float" unit="rad"/>
-      <field name="gate_height"  type="float" unit="rad"/>
-      <field name="gate_psi"     type="float" unit="rad"/>
-      <field name="gate_theta"   type="float" unit="rad"/>
-      <field name="gate_depth"   type="float" unit="m"/>
-      <field name="earth_theta"  type="float" unit="rad"/>
-      <field name="earth_psi"    type="float" unit="rad"/>
+    <message name="DELFLY_CONTROL" id="74">
       <field name="att_sp_phi"   type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="att_sp_theta" type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="att_sp_psi"   type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
@@ -613,12 +605,41 @@
       <field name="fused_alt"   type="float" unit="m"/>
       <field name="climb_rate"   type="float" unit="m/s"/>
       <field name="laser_rate"   type="float" unit="m/s"/>
-      <field name="line_psi"   type="float" unit="rad"/>
-      <field name="obstacle_psi"   type="float" unit="rad"/>
-      	   	</message>
+      <field name="laser_dt"   type="float" unit="s"/>
+    </message>
+   
+    <message name="DELFLY_GATE" id="75">
+      <field name="gate_quality" type="uint8"/>
+      <field name="gate_width"   type="float" unit="rad"/>
+      <field name="gate_height"  type="float" unit="rad"/>
+      <field name="gate_psi"     type="float" unit="rad"/>
+      <field name="gate_theta"   type="float" unit="rad"/>
+      <field name="gate_depth"   type="float" unit="m"/>
+      <field name="earth_theta"  type="float" unit="rad"/>
+      <field name="earth_psi"    type="float" unit="rad"/>
+      <field name="dt"   type="float" unit="s"/>
+    </message>
+      	   	
+    <message name="DELFLY_FOLLOW" id="76">
+      <field name="line_A"   type="float"/>
+      <field name="line_B"   type="float"/>
+      <field name="line_C"   type="float"/>
+      <field name="line_r2"   type="float"/>
+      <field name="line_lat"   type="float" unit="m"/>
+      <field name="line_lon"   type="float" unit="m"/>
+      <field name="line_angle"   type="float" unit="rad"/>
+      <field name="line_latF"   type="float" unit="m"/>
+      <field name="line_lonF"   type="float" unit="m"/>
+      <field name="line_angleF"   type="float" unit="rad"/>
+      <field name="obstacle_phi"   type="float" unit="rad"/>
+      <field name="obstacle_theta"   type="float" unit="rad"/>
+      <field name="obstacle_phiF"   type="float" unit="rad"/>
+      <field name="obstacle_thetaF"   type="float" unit="rad"/>
+      <field name="obstacle_lat"   type="float" unit="m"/>
+      <field name="obstacle_lon"   type="float" unit="m"/>
+      <field name="dt"   type="float" unit="s"/>
+    </message>
 
-    <!-- 75 is free -->
-    <!-- 76 is free -->
     <!-- 77 is free -->
 
     <!--message for Invariant filter with position-->
