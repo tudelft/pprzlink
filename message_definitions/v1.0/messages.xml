@@ -600,12 +600,15 @@
       <field name="att_sp_theta" type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="att_sp_psi"   type="int32" alt_unit="deg" alt_unit_coef="0.0139882"/>
       <field name="thrust_sp"    type="float" unit="m/s"/>
-      <field name="laser_alt"   type="float" unit="m"/>
-      <field name="baro_alt"   type="float" unit="m"/>
-      <field name="fused_alt"   type="float" unit="m"/>
+      <field name="laser_alt"    type="float" unit="m"/>
+      <field name="laser_altF"   type="float" unit="m"/>
+      <field name="baro_alt"     type="float" unit="m"/>
+      <field name="baro_altF"    type="float" unit="m"/>
+      <field name="fused_alt"    type="float" unit="m"/>
       <field name="climb_rate"   type="float" unit="m/s"/>
       <field name="laser_rate"   type="float" unit="m/s"/>
-      <field name="laser_dt"   type="float" unit="s"/>
+      <field name="laser_dt"     type="float" unit="s"/>
+      <field name="baro_dt"      type="float" unit="s"/>
     </message>
    
     <message name="DELFLY_GATE" id="75">
