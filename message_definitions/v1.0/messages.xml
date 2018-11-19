@@ -620,6 +620,8 @@
       <field name="gate_psi"     type="float" unit="rad"/>
       <field name="gate_theta"   type="float" unit="rad"/>
       <field name="gate_depth"   type="float" unit="m"/>
+      <field name="position_along_gate_field"   type="float" unit="m"/>
+      <field name="position_along_gate_field_from_speed"   type="float" unit="m"/>
       <field name="earth_theta"  type="float" unit="rad"/>
       <field name="earth_psi"    type="float" unit="rad"/>
       <field name="dt"   type="float" unit="s"/>
