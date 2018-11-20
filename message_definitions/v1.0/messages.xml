@@ -3059,6 +3059,7 @@
       <field name="C"  type="float" unit="rad"> Constant coefficient of the second order fitted polynomial</field>
       <field name="phi_obstacle"     type="float" unit="rad">Bearing of the line in the camera frame</field>
       <field name="theta_obstacle"   type="float" unit="rad"/>
+      <field name = "num_points" type="uint32_t" unit="[-]"/>
     </message>
     
     <message name="IMCU_DATALINK" id="113">
