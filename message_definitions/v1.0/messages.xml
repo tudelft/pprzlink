@@ -632,6 +632,7 @@
       <field name="line_B"   type="float"/>
       <field name="line_C"   type="float"/>
       <field name="line_r2"   type="float"/>
+      <field name="line_points"   type="uint32"/>
       <field name="line_lat"   type="float" unit="m"/>
       <field name="line_lon"   type="float" unit="m"/>
       <field name="line_angle"   type="float" unit="rad"/>
