@@ -1834,7 +1834,22 @@
       <field name="mz"    type="float" />
     </message>
 
-    <message name="REMOTE_SENSING_AM" id="194">
+    <message name="FALCON_SENSOR" id="194">
+      <field name="valid"       type="uint8" values="FALSE|TRUE"/>
+      <field name="mode"        type="uint8" values="OFF|SIXDOF|RELANGLE"/>
+      <field name="beacon_id"   type="uint16"/>
+      <field name="p_out"       type="float[3]" unit="m"/>
+      <field name="p_in"        type="float[3]" unit="m"/>
+      <field name="quat"        type="float[4]"/>
+      <field name="pos_var"     type="float[3]" unit="m^2"/>
+      <field name="quat_var"    type="float[3]" unit="rad^2"/>
+      <field name="intensity"   type="float"/>
+      <field name="width"       type="float"  unit="pixels"/>
+      <field name="angles"      type="float[2]"  unit="rad"/>
+      <field name="distance"    type="float"  unit="m">Distance derived from intensity in Relangle mode</field>
+    </message>
+
+    <message name="REMOTE_SENSING_AM" id="192">
       <field name="target_pos_tow"     type="uint32"> Time of receiption of a ground station packet</field>
       <field name="target_pos_vel_NED" type="float[3]" unit="m/s"/> ground station speed in NED frame</field>
       <field name="target_pos_NED"     type="float[3]" unit="m"/> ground station position in NED frame</field>
