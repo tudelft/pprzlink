@@ -1836,7 +1836,7 @@
 
     <message name="FALCON_SENSOR" id="194">
       <field name="valid"       type="uint8" values="FALSE|TRUE"/>
-      <field name="mode"        type="uint8" values="OFF|SIXDOF|RELANGLE"/>
+      <field name="mode"        type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
       <field name="beacon_id"   type="uint16"/>
       <field name="p_out"       type="float[3]" unit="m"/>
       <field name="p_in"        type="float[3]" unit="m"/>
@@ -1851,29 +1851,29 @@
 
     <message name="REMOTE_SENSING_AM" id="192">
       <field name="target_pos_tow"     type="uint32"> Time of receiption of a ground station packet</field>
-      <field name="target_pos_vel_NED" type="float[3]" unit="m/s"/> ground station speed in NED frame</field>
-      <field name="target_pos_NED"     type="float[3]" unit="m"/> ground station position in NED frame</field>
-      <field name="target_pos_quat"    type="float[4]"/> ground station quaterions in NED frame</field>
+      <field name="target_pos_vel_NED" type="float[3]" unit="m/s"> ground station speed in NED frame</field>
+      <field name="target_pos_NED"     type="float[3]" unit="m"> ground station position in NED frame</field>
+      <field name="target_pos_quat"    type="float[4]"> ground station quaterions in NED frame</field>
 
-      <field name="falcon_sixdof_tow"     type="uint32"/> Time of receiption of a falcon sixdof packet</field>
-      <field name="falcon_sixdof_pos_NED" type="float[3]" unit="m"/> falcon platform position in NED frame</field>
-      <field name="falcon_sixdof_pos_NED_var" type="float[3]" unit="m"/> falcon platform position variance in NED frame</field>
-      <field name="falcon_sixdof_quat"    type="float[4]"/> falcon platform quaterions in NED frame</field>
+      <field name="falcon_sixdof_tow"     type="uint32"> Time of receiption of a falcon sixdof packet</field>
+      <field name="falcon_sixdof_pos_NED" type="float[3]" unit="m"> falcon platform position in NED frame</field>
+      <field name="falcon_sixdof_pos_NED_var" type="float[3]" unit="m"> falcon platform position variance in NED frame</field>
+      <field name="falcon_sixdof_quat"    type="float[4]"> falcon platform quaterions in NED frame</field>
 
-      <field name="falcon_relangle_tow"     type="uint32"/> Time of receiption of a falcon relangle packet</field>
-      <field name="falcon_relangle_beacon_id" type="uint16"/> falcon platform beacon id</field>
-      <field name="falcon_relangle" type="float[2]" unit="rad"/> falcon platform azimuth and elevation angles</field>
-      <field name="falcon_relangle_intensity" type="float"/> falcon platform intensity</field>
-      <field name="falcon_relangle_width" type="float"/> falcon platform width</field>
+      <field name="falcon_relangle_tow"     type="uint32"> Time of receiption of a falcon relangle packet</field>
+      <field name="falcon_relangle_beacon_id" type="uint16"> falcon platform beacon id</field>
+      <field name="falcon_relangle" type="float[2]" unit="rad"> falcon platform azimuth and elevation angles</field>
+      <field name="falcon_relangle_intensity" type="float"> falcon platform intensity</field>
+      <field name="falcon_relangle_width" type="float"> falcon platform width</field>
 
-      <field name="falcon_relbeacon_tow"     type="uint32"/> Time of receiption of a falcon relbeacon packet</field>
-      <field name="falcon_relbeacon_beacon_id" type="uint16"/> falcon platform beacon id</field>
-      <field name="falcon_relbeacon_pos" type="float[3]" unit="m"/> falcon beacon position in sensor reference frame</field>
+      <field name="falcon_relbeacon_tow"     type="uint32"> Time of receiption of a falcon relbeacon packet</field>
+      <field name="falcon_relbeacon_beacon_id" type="uint16"> falcon platform beacon id</field>
+      <field name="falcon_relbeacon_pos" type="float[3]" unit="m"> falcon beacon position in sensor reference frame</field>
 
-      <field name="opencv_aruco_tow"     type="uint32"/> Time of receiption of a opencv aruco packet</field>
-      <field name="opencv_aruco_id" type="uint16"/> opencv aruco id</field>
-      <field name="opencv_aruco_pos" type="float[3]" unit="m"/> opencv aruco position in camera frame</field>
-      <field name="opencv_aruco_quat" type="float[4]"/> opencv aruco quaterions in camera frame</field>      
+      <field name="opencv_aruco_tow"     type="uint32"> Time of receiption of a opencv aruco packet</field>
+      <field name="opencv_aruco_id" type="uint16"> opencv aruco id</field>
+      <field name="opencv_aruco_pos" type="float[3]" unit="m"> opencv aruco position in camera frame</field>
+      <field name="opencv_aruco_quat" type="float[4]"> opencv aruco quaterions in camera frame</field>      
     </message>
 
     <!-- 195 is free -->
@@ -3583,13 +3583,13 @@
 
     <message name="IMCU_FALCON_RELBEACON" id="119">
       <description>Relative position of a single beacon with respect to the sensor frame (Frame cable front X: forward, Z: left, Y: down)</description>
-      <field name="id" type="uint16_t">Unique id of the beacon</field>
+      <field name="id" type="uint16">Unique id of the beacon</field>
       <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the beacon with respect to the sensor frame</field>
     </message>
 
     <message name="IMCU_OPENCV_ARUCO" id="120">
       <description>Relative position of a single aruco marker with respect to the camera frame</description>
-      <field name="id" type="uint16_t">Unique id of the beacon</field>
+      <field name="id" type="uint16">Unique id of the beacon</field>
       <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the aruco with respect to the camera frame</field>
     </message>
 
