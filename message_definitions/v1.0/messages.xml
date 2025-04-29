@@ -1751,7 +1751,18 @@
       <field name="max_airspeed"    type="float" unit="m/s">Maximum airspeed bound for NAV</field>
     </message>
 
-    <!-- 182 is free -->
+    <message name="GROUND_DETECT" id="182">
+      <description>
+        Ground detection status.
+      </description>
+      <field name="ground_detected" type="uint8" values="FALSE|TRUE">Bool whether ground is detected or not</field>
+      <field name="vspeed_ned" type="float" unit="m/s">Vertical speed in NED frame</field>
+      <field name="spec_thrust_down" type="float" unit="N">Specific thrust down</field>
+      <field name="accel_filt_down" type="float" unit="m/s^2">Filtered vertical acceleration</field>
+      <field name="agl_dist_filt" type="float" unit="m">Filtered AGL distance</field>
+      <field name="hx711" type="uint8" values="FALSE|TRUE">Whether the hx711 module detects ground (strain gauges)</field>
+      <field name="triggers" type="uint16">Bitmask containing status information on the different ground detect triggers</field>
+    </message>
 
     <message name="DOUBLET" id="183">
       <field name="active"              type="uint8">Doublet is active</field>
