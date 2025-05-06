@@ -3609,6 +3609,39 @@
       <field name="mode" type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
     </message>
 
+    <message name="IMCU_REQUEST_PATH_COEFF" id="122">
+      <description>Request path coefficients for landing</description>
+      <field name="timestamp_request" type="uint32" unit="ms">tow of path request</field>
+      <field name="coeffs_ship_prediction" type="float[24]">Ship speed prediction coefficients</field>
+      <field name="init_NED_path_pos" type="float[3]">Trajectory starting position in NED</field>
+      <field name="init_NED_path_speed" type="float[3]">Trajectory starting speed in NED</field>
+      <field name="init_NED_path_acc" type="float[3]">Trajectory starting acc in NED</field>
+      <field name="psi_ship_rad" type="float">Current ship heading in radiants</field>
+      <field name="P0_ship_NED" type="float[3]">Current ship heading in radiants</field>
+      <field name="time_delay_prediction" type="float">Ship prediction delay</field>
+    </message>
+
+    <message name="IMCU_LANDING_PATH_SETTINGS" id="123">
+      <description>Extra parameters for the landing algorithm</description>
+      <field name="min_time_landing" type="float" unit="s">Minimum time for landing</field>
+      <field name="max_time_landing" type="float" unit="s">Maximum time for landing</field>
+      <field name="landing_time_resolution" type="float" unit="s">Resolution of the landing time</field>
+      <field name="V_bound_max_control" type="float[3]" unit="m/s">Upper speed bounds for the trajectory generation in the control RF</field>
+      <field name="V_bound_min_control" type="float[3]" unit="m/s">Lower speed bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_max_control" type="float[3]" unit="m/s^2">Upper acc bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_min_control" type="float[3]" unit="m/s^2">Lower acc bounds for the trajectory generation in the control RF</field>
+      <field name="num_points" type="uint16">Number of points where the speed and acc boundaries are checked</field>
+    </message>
+
+    <message name="IMCU_RETURN_PATH_COEFF" id="124">
+      <description>Output of the landing trajectory algorithm</description>
+      <field name="exitflag" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
+      <field name="expected_landing_time" type="float" unit="s">Expected landing time in seconds</field>
+      <field name="coeffs_landing_path" type="float[18]">Landing path coefficients</field>
+      <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
+      <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
+    </message>
+    
   </msg_class>
 
 </protocol>
