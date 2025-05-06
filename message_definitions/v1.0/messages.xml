@@ -3635,6 +3635,7 @@
 
     <message name="IMCU_RETURN_PATH_COEFF" id="124">
       <description>Output of the landing trajectory algorithm</description>
+      <field name="runtime_path_evaluation_ms" type="uint16" unit="ms">time needed to compute the landing path</field>
       <field name="exitflag" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
       <field name="expected_landing_time" type="float" unit="s">Expected landing time in seconds</field>
       <field name="coeffs_landing_path" type="float[18]">Landing path coefficients</field>
