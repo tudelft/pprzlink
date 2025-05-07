@@ -3642,7 +3642,62 @@
       <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
       <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
     </message>
-    
+
+    <message name="IMCU_LANDING_ALGORITHM_PARAMS" id="125">
+      <description>Parameters for the landing algorithm</description>
+      <!-- Line approach params -->
+      <field name="PH_offset_ship_ctr" type="float[3]" unit="m">Offset of the PH waypoint in the ship control reference frame</field>
+      <field name="line_approach_speed" type="float" unit="m/s">Line approach speed in m/s</field>
+      <field name="approach_heading_ship_rad" type="float">Angle with respect to the ship stern where the approach will be started</field>
+      <field name="dist_line_gain" type="float">Distance line gain</field>
+      <field name="max_line_gain" type="float">Maximum line gain</field>
+      <field name="vel_gain_approach" type="float[3]"> velocity gain of the approach landing phase</field>
+      <!-- PH hovering params -->
+      <field name="pos_gain_hovering" type="float[3]"> position gain of the hovering landing phase</field>
+      <field name="vel_gain_hovering" type="float[3]"> velocity gain of the hovering landing phase</field>
+      <field name="hovering_engage_dist" type="float">Euclidean distance for engagement of the PH hovering mode</field>
+      <!-- Trajectory planning params -->
+      <field name="min_time_landing" type="float" unit="s">Minimum time for landing</field>
+      <field name="max_time_landing" type="float" unit="s">Maximum time for landing</field>
+      <field name="landing_time_resolution" type="float" unit="s">Resolution of the landing time</field>
+      <field name="V_bound_max_control" type="float[3]" unit="m/s">Upper speed bounds for the trajectory generation in the control RF</field>
+      <field name="V_bound_min_control" type="float[3]" unit="m/s">Lower speed bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_max_control" type="float[3]" unit="m/s^2">Upper acc bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_min_control" type="float[3]" unit="m/s^2">Lower acc bounds for the trajectory generation in the control RF</field>
+      <field name="num_points" type="uint16">Number of points where the speed and acc boundaries are checked</field>
+      <field name="pos_gain_trajectory" type="float[3]"> position gain of the trajectory landing phase</field>
+      <field name="vel_gain_trajectory" type="float[3]"> velocity gain of the trajectory landing phase</field>
+      <!-- Flare params -->
+      <field name="flare_engage_height" type="float">Engaging height for the flare manoeuvre</field>
+      <field name="flare_vertical_speed" type="float">Vertical speed of the flare manoeuvre</field>
+      <field name="vel_gain_flare" type="float[3]"> velocity gain of the flare landing phase</field>
+    </message>
+
+    <message name="IMCU_LANDING_ALGORITHM_STATES" id="126">
+      <description>States for the landing algorithm</description>
+      <field name="timestamp_states" type="uint32" unit="ms">tow of states</field>
+      <field name="P0_UAV_NED" type="float[3]" unit="m">Current UAV position in NED frame</field>
+      <field name="V0_UAV_NED" type="float[3]" unit="m/s">Current UAV speed in NED frame</field>
+      <field name="V0_SHIP_NED" type="float[3]" unit="m/s">Current SHIP speed in NED frame</field>
+      <field name="V0_SHIP_NED_filt" type="float[3]" unit="m/s">Filtered SHIP speed in NED frame</field>
+      <field name="SHIP_att_rad" type="float[3]" unit="rad">SHIP attitude in radiants</field>
+      <field name="UAV_psi_rad" type="float" unit="rad">UAV psi angle in radiants</field>
+      <field name="coeffs_ship_prediction" type="float[24]">Ship speed prediction coefficients</field>
+      <field name="t_delay_ship_prediction_seconds" type="float">Time delay of ship predictions in seconds</field>
+    </message>
+
+    <message name="IMCU_LANDING_ALGORITHM_OUTPUT" id="127">
+      <description>Landing algorithm output</description>
+      <field name="timestamp_output" type="uint32" unit="ms">tow of computation</field>
+      <field name="UAV_acc_target_NED" type="float[3]" unit="m/s">Target acceleration vector</field>
+      <field name="UAV_desired_phi_theta_rad" type="float[2]">Desired UAV phi and theta</field>
+      <field name="landing_algorithm_mode" type="int8">Landing algorithm mode</field>
+      <field name="exitflag_path_planner" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
+      <field name="expected_landing_time" type="float" unit="s">Expected landing time</field>
+      <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
+      <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
+    </message>
+
   </msg_class>
 
 </protocol>
