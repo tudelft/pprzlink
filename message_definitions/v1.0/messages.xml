@@ -3678,6 +3678,7 @@
       <field name="timestamp_states" type="uint32" unit="ms">tow of states</field>
       <field name="P0_UAV_NED" type="float[3]" unit="m">Current UAV position in NED frame</field>
       <field name="V0_UAV_NED" type="float[3]" unit="m/s">Current UAV speed in NED frame</field>
+      <field name="P0_SHIP_NED" type="float[3]" unit="m">Current SHIP position in NED frame</field>
       <field name="V0_SHIP_NED" type="float[3]" unit="m/s">Current SHIP speed in NED frame</field>
       <field name="V0_SHIP_NED_filt" type="float[3]" unit="m/s">Filtered SHIP speed in NED frame</field>
       <field name="SHIP_att_rad" type="float[3]" unit="rad">SHIP attitude in radiants</field>
