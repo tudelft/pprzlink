@@ -3648,7 +3648,7 @@
       <!-- Line approach params -->
       <field name="PH_offset_ship_ctr" type="float[3]" unit="m">Offset of the PH waypoint in the ship control reference frame</field>
       <field name="line_approach_speed" type="float" unit="m/s">Line approach speed in m/s</field>
-      <field name="approach_heading_ship_rad" type="float">Angle with respect to the ship stern where the approach will be started</field>
+      <field name="approach_line_angle_rad" type="float">Angle with respect to the ship stern where the approach will be started</field>
       <field name="dist_line_gain" type="float">Distance line gain</field>
       <field name="max_line_gain" type="float">Maximum line gain</field>
       <field name="vel_gain_approach" type="float[3]"> velocity gain of the approach landing phase</field>
@@ -3670,6 +3670,7 @@
       <!-- Flare params -->
       <field name="flare_engage_height" type="float">Engaging height for the flare manoeuvre</field>
       <field name="flare_vertical_speed" type="float">Vertical speed of the flare manoeuvre</field>
+      <field name="pos_gain_flare" type="float[3]"> position gain of the flare landing phase</field>
       <field name="vel_gain_flare" type="float[3]"> velocity gain of the flare landing phase</field>
     </message>
 
