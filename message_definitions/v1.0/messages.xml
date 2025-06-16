@@ -1939,7 +1939,10 @@
       <field name="distance"    type="float"  unit="m">Distance derived from intensity in Relangle mode</field>
     </message>
 
-    <!-- 195 is free -->
+    <message name="FALCON_CMD" id="195">
+      <description>Command to the Falcon sensor</description>
+      <field name="mode" type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
+    </message>
 
     <message name="AIRSPEED_WIND_ESTIMATOR_EKF" id="196">
       <field name="u_est"     type="float" unit="m/s"/>
