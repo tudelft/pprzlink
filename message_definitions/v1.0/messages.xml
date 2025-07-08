@@ -3655,6 +3655,7 @@
 
     <message name="IMCU_OPENCV_ARUCO" id="120">
       <description>Relative position of a single aruco marker with respect to the camera frame</description>
+      <field name="timestamp" type="uint32" unit="ms">Timestamp of the aruco detection</field>
       <field name="id" type="uint16">Unique id of the beacon</field>
       <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the aruco with respect to the NED frame</field>
     </message>
@@ -3761,6 +3762,7 @@
     </message>
 
     <message name="IMCU_ARUCO_ATTITUDE" id="129">
+      <field name="timestamp" type="uint32" unit="ms">Timestamp of the attitude</field>
       <field name="body_to_ned" type="float[4]">Body to NED frame quaternion</field>
     </message>
 
