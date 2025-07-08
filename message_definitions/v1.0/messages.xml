@@ -3658,6 +3658,7 @@
       <field name="timestamp" type="uint32" unit="ms">Timestamp of the aruco detection</field>
       <field name="id" type="uint16">Unique id of the beacon</field>
       <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the aruco with respect to the NED frame</field>
+      <field name="body_to_ned" type="float[4]">Body to NED frame quaternion</field>
     </message>
 
     <message name="IMCU_FALCON_CMD" id="121">
@@ -3756,18 +3757,9 @@
       <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
     </message>
 
-    <message name="IMCU_ARUCO_OFFSETS" id="128">
-      <field name="offset" type="float[3]">Body to UAV distance offset</field>
-      <field name="sensor_to_body" type="float[4]">Sensor to body frame quaternion</field>
-    </message>
-
-    <message name="IMCU_ARUCO_ATTITUDE" id="129">
+    <message name="IMCU_ARUCO_ATTITUDE" id="128">
       <field name="timestamp" type="uint32" unit="ms">Timestamp of the attitude</field>
       <field name="body_to_ned" type="float[4]">Body to NED frame quaternion</field>
-    </message>
-
-    <message name="IMCU_ARUCO_REQUEST_OFFSETS" id="130">
-      <field name="request" type="uint8"></field>
     </message>
   </msg_class>
 
