@@ -117,7 +117,14 @@
       <field name="energy"    type="float" unit="Wh">Accumulated consumed energy</field>
     </message>
 
-    <!-- 13 is free -->
+        <message name="TARGET_POS_KALMAN" id="13">
+      <field name="posN" type="float" unit="m"/>
+      <field name="posE" type="float" unit="m"/>
+      <field name="posD" type="float" unit="m"/>
+      <field name="velN" type="float" unit="m/s"/>
+      <field name="velE" type="float" unit="m/s"/>
+      <field name="velD" type="float" unit="m/s"/>
+    </message>
 
     <message name="CALIBRATION" id="14">
       <field name="climb_sum_err" type="float" format="%.1f"/>
@@ -434,7 +441,17 @@
       <field name="cycle_time" type="uint32" unit="ms"/>
     </message>
 
-    <!-- 51 is free -->
+    <message name="LANDING_ALGORITHM_OUTPUT" id="51">
+      <description>Landing algorithm output</description>
+      <field name="timestamp_output" type="uint32" unit="ms">tow of computation</field>
+      <field name="UAV_acc_target_NED" type="float[3]" unit="m/s">Target acceleration vector</field>
+      <field name="UAV_desired_phi_theta_rad" type="float[2]">Desired UAV phi and theta</field>
+      <field name="landing_algorithm_mode" type="int8">Landing algorithm mode</field>
+      <field name="exitflag_path_planner" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
+      <field name="expected_landing_time" type="float" unit="s">Expected landing time</field>
+      <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
+      <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
+    </message>
 
     <message name="MPPT" id="52">
       <field name="values" type="int16[]" alt_unit_coef="1e-3"/>
@@ -472,7 +489,19 @@
       <field name="scaled" type="float"/>
     </message>
 
-    <!-- 57 is free-->
+    <message name="LANDING_ALGORITHM_STATES" id="57">
+      <description>States for the landing algorithm</description>
+      <field name="timestamp_states" type="uint32" unit="ms">tow of states</field>
+      <field name="P0_UAV_NED" type="float[3]" unit="m">Current UAV position in NED frame</field>
+      <field name="V0_UAV_NED" type="float[3]" unit="m/s">Current UAV speed in NED frame</field>
+      <field name="P0_SHIP_NED" type="float[3]" unit="m">Current SHIP position in NED frame</field>
+      <field name="V0_SHIP_NED" type="float[3]" unit="m/s">Current SHIP speed in NED frame</field>
+      <field name="V0_SHIP_NED_filt" type="float[3]" unit="m/s">Filtered SHIP speed in NED frame</field>
+      <field name="SHIP_att_rad" type="float[3]" unit="rad">SHIP attitude in radiants</field>
+      <field name="UAV_psi_rad" type="float" unit="rad">UAV psi angle in radiants</field>
+      <field name="coeffs_ship_prediction" type="float[24]">Ship speed prediction coefficients</field>
+      <field name="t_delay_ship_prediction_seconds" type="float">Time delay of ship predictions in seconds</field>
+    </message>
 
     <message name="VISION_OUTBACK" id="58">
       <field name="status" type="uint8"/>
@@ -877,16 +906,24 @@
       <description>
         Global position, speed and ID of a target for functions like 'Follow Me'
       </description>
+      <field name="tow" type="uint32" unit="ms">Time of week</field>
+      <field name="recv_time" type="uint32" unit="ms">Time of reception</field>
       <field name="lat" type="int32" unit="1e7deg" alt_unit="deg" alt_unit_coef="0.0000001"/>
       <field name="lon" type="int32" unit="1e7deg" alt_unit="deg" alt_unit_coef="0.0000001"/>
       <field name="alt" type="int32" unit="mm" alt_unit="m">Height above Mean Sea Level (geoid)</field>
-      <field name="speed" type="float" unit="m/s">Ground speed</field>
-      <field name="climb" type="float" unit="m/s">Climb speed</field>
-      <field name="course" type="float" unit="deg" format="%.1f"/>
-      <field name="heading" type="float" unit="deg" format="%.1f"/>
-      <field name="off_heading" type="float" unit="deg">Offset heading</field>
-      <field name="off_distance" type="float" unit="m">Offset distance</field>
-      <field name="off_height" type="float" unit="m">Offset height</field>
+      <field name="vnorth" type="float" unit="m/s">Ground speed north</field>
+      <field name="veast" type="float" unit="m/s"> Ground speed east</field>
+      <field name="vdown" type="float" unit="m/s"> Ground speed down</field>
+      <field name="body_qi"   type="float">Quaternion i body to NED</field>
+      <field name="body_qx"   type="float">Quaternion x body to NED</field>
+      <field name="body_qy"   type="float">Quaternion y body to NED</field>
+      <field name="body_qz"   type="float">Quaternion z body to NED</field>
+      <field name="p" type="float" unit="rad/s">Body rate p</field>
+      <field name="q" type="float" unit="rad/s">Body rate q</field>
+      <field name="r" type="float" unit="rad/s">Body rate r</field>
+      <field name="off_x" type="float" unit="m">X offset of landing pad in target body frame [m]</field>
+      <field name="off_y" type="float" unit="m">Y offset of landing pad in target body frame [m]</field>
+      <field name="off_z" type="float" unit="m">Z offset of landing pad in target body frame [m]</field>
     </message>
 
     <message name="HIH_STATUS" id="96">
@@ -1880,8 +1917,33 @@
       <field name="actuators_t4_rolling_msg_out"    type="float">T4 output rolling message content</field>
       <field name="actuators_t4_rolling_msg_out_id" type="uint8">T4 output Rolling message ID</field>
      </message>
-  
-    <!-- 192 is free -->
+
+    <message name="REMOTE_SENSING_AM" id="192">
+      <field name="target_pos_tow"     type="uint32"> Time of receiption of a ground station packet</field>
+      <field name="target_pos_vel_NED" type="float[3]" unit="m/s"> ground station speed in NED frame</field>
+      <field name="target_pos_NED"     type="float[3]" unit="m"> ground station position in NED frame</field>
+      <field name="target_pos_quat"    type="float[4]"> ground station quaterions in NED frame</field>
+
+      <field name="falcon_sixdof_tow"     type="uint32"> Time of receiption of a falcon sixdof packet</field>
+      <field name="falcon_sixdof_pos_NED" type="float[3]" unit="m"> falcon platform position in NED frame</field>
+      <field name="falcon_sixdof_pos_NED_var" type="float[3]" unit="m"> falcon platform position variance in NED frame</field>
+      <field name="falcon_sixdof_quat"    type="float[4]"> falcon platform quaterions in NED frame</field>
+
+      <field name="falcon_relangle_tow"     type="uint32"> Time of receiption of a falcon relangle packet</field>
+      <field name="falcon_relangle_beacon_id" type="uint16"> falcon platform beacon id</field>
+      <field name="falcon_relangle" type="float[2]" unit="rad"> falcon platform azimuth and elevation angles</field>
+      <field name="falcon_relangle_intensity" type="float"> falcon platform intensity</field>
+      <field name="falcon_relangle_width" type="float"> falcon platform width</field>
+
+      <field name="falcon_relbeacon_tow"     type="uint32"> Time of receiption of a falcon relbeacon packet</field>
+      <field name="falcon_relbeacon_beacon_id" type="uint16"> falcon platform beacon id</field>
+      <field name="falcon_relbeacon_pos" type="float[3]" unit="m"> falcon beacon position in sensor reference frame</field>
+
+      <field name="opencv_aruco_tow"     type="uint32"> Time of receiption of a opencv aruco packet</field>
+      <field name="opencv_aruco_id" type="uint16"> opencv aruco id</field>
+      <field name="opencv_aruco_pos" type="float[3]" unit="m"> opencv aruco position in camera frame</field>
+      <field name="opencv_aruco_quat" type="float[4]"> opencv aruco quaterions in camera frame</field>      
+    </message>
 
     <message name="AHRS_LKF" id="193">
       <field name="phi"   type="float" unit="rad"   alt_unit="deg"   alt_unit_coef="57.29578" />
@@ -1902,8 +1964,25 @@
       <field name="mz"    type="float" />
     </message>
 
-    <!-- 194 is free -->
-    <!-- 195 is free -->
+    <message name="FALCON_SENSOR" id="194">
+      <field name="valid"       type="uint8" values="FALSE|TRUE"/>
+      <field name="mode"        type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
+      <field name="beacon_id"   type="uint16"/>
+      <field name="p_out"       type="float[3]" unit="m"/>
+      <field name="p_in"        type="float[3]" unit="m"/>
+      <field name="quat"        type="float[4]"/>
+      <field name="pos_var"     type="float[3]" unit="m^2"/>
+      <field name="quat_var"    type="float[3]" unit="rad^2"/>
+      <field name="intensity"   type="float"/>
+      <field name="width"       type="float"  unit="pixels"/>
+      <field name="angles"      type="float[2]"  unit="rad"/>
+      <field name="distance"    type="float"  unit="m">Distance derived from intensity in Relangle mode</field>
+    </message>
+
+    <message name="FALCON_CMD" id="195">
+      <description>Command to the Falcon sensor</description>
+      <field name="mode" type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
+    </message>
 
     <message name="AIRSPEED_WIND_ESTIMATOR_EKF" id="196">
       <field name="u_est"     type="float" unit="m/s"/>
@@ -2050,7 +2129,36 @@
       <field name="commands" type="int32[]">Commands send to actuators</field>
     </message>
 
-    <!-- 212 is free -->
+    <message name="LANDING_ALGORITHM_PARAMS" id="212">
+      <description>Parameters for the landing algorithm</description>
+      <!-- Line approach params -->
+      <field name="PH_offset_ship_ctr" type="float[3]" unit="m">Offset of the PH waypoint in the ship control reference frame</field>
+      <field name="line_approach_speed" type="float" unit="m/s">Line approach speed in m/s</field>
+      <field name="approach_line_angle_rad" type="float">Angle with respect to the ship stern where the approach will be started</field>
+      <field name="dist_line_gain" type="float">Distance line gain</field>
+      <field name="max_line_gain" type="float">Maximum line gain</field>
+      <field name="vel_gain_approach" type="float[3]"> velocity gain of the approach landing phase</field>
+      <!-- PH hovering params -->
+      <field name="pos_gain_hovering" type="float[3]"> position gain of the hovering landing phase</field>
+      <field name="vel_gain_hovering" type="float[3]"> velocity gain of the hovering landing phase</field>
+      <field name="hovering_engage_dist" type="float">Euclidean distance for engagement of the PH hovering mode</field>
+      <!-- Trajectory planning params -->
+      <field name="min_time_landing" type="float" unit="s">Minimum time for landing</field>
+      <field name="max_time_landing" type="float" unit="s">Maximum time for landing</field>
+      <field name="landing_time_resolution" type="float" unit="s">Resolution of the landing time</field>
+      <field name="V_bound_max_control" type="float[3]" unit="m/s">Upper speed bounds for the trajectory generation in the control RF</field>
+      <field name="V_bound_min_control" type="float[3]" unit="m/s">Lower speed bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_max_control" type="float[3]" unit="m/s^2">Upper acc bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_min_control" type="float[3]" unit="m/s^2">Lower acc bounds for the trajectory generation in the control RF</field>
+      <field name="num_points" type="uint16">Number of points where the speed and acc boundaries are checked</field>
+      <field name="pos_gain_trajectory" type="float[3]"> position gain of the trajectory landing phase</field>
+      <field name="vel_gain_trajectory" type="float[3]"> velocity gain of the trajectory landing phase</field>
+      <!-- Flare params -->
+      <field name="flare_engage_height" type="float">Engaging height for the flare manoeuvre</field>
+      <field name="flare_vertical_speed" type="float">Vertical speed of the flare manoeuvre</field>
+      <field name="pos_gain_flare" type="float[3]"> position gain of the flare landing phase</field>
+      <field name="vel_gain_flare" type="float[3]"> velocity gain of the flare landing phase</field>
+    </message>
 
     <message name="TUNE_VERT" id="213">
       <field name="z_sp"      type="int32" alt_unit="m"    alt_unit_coef="0.0039063"/>
@@ -2406,7 +2514,18 @@
       <field name="Crc1087"      type="uint32"  />
     </message>
 
-    <!-- 250 is free -->
+    <message name="GROUND_DETECT" id="250">
+      <description>
+        Ground detection status.
+      </description>
+      <field name="ground_detected" type="uint8" values="FALSE|TRUE">Bool whether ground is detected or not</field>
+      <field name="vspeed_ned" type="float" unit="m/s">Vertical speed in NED frame</field>
+      <field name="spec_thrust_down" type="float" unit="N">Specific thrust down</field>
+      <field name="accel_filt_down" type="float" unit="m/s^2">Filtered vertical acceleration</field>
+      <field name="agl_dist_filt" type="float" unit="m">Filtered AGL distance</field>
+      <field name="hx711" type="uint8" values="FALSE|TRUE">Whether the hx711 module detects ground (strain gauges)</field>
+      <field name="triggers" type="uint16">Bitmask containing status information on the different ground detect triggers</field>
+    </message>
 
     <message name="GPS_RELPOS" id="251">
       <field name="reference_id"  type="uint16">Reference station identification</field>
@@ -2861,13 +2980,20 @@
       </description>
       <field name="ac_id" type="uint8"/>
       <field name="target_id" type="uint8"/>
+      <field name="tow" type="uint32">Time of the week GPS</field>
       <field name="lat" type="int32" unit="1e7deg" alt_unit="deg" alt_unit_coef="0.0000001"/>
       <field name="lon" type="int32" unit="1e7deg" alt_unit="deg" alt_unit_coef="0.0000001"/>
       <field name="alt" type="int32" unit="mm" alt_unit="m">Height above Mean Sea Level (geoid)</field>
-      <field name="speed" type="float" unit="m/s">Ground speed</field>
-      <field name="climb" type="float" unit="m/s">Climb speed</field>
-      <field name="course" type="float" unit="deg" format="%.1f"/>
-      <field name="heading" type="float" unit="deg" format="%.1f">Ground heading</field>
+      <field name="vnorth" type="float" unit="m/s">Ground speed north</field>
+      <field name="veast" type="float" unit="m/s"> Ground speed east</field>
+      <field name="vdown" type="float" unit="m/s"> Ground speed down</field>
+      <field name="body_qi"   type="float">Quaternion i body to NED</field>
+      <field name="body_qx"   type="float">Quaternion x body to NED</field>
+      <field name="body_qy"   type="float">Quaternion y body to NED</field>
+      <field name="body_qz"   type="float">Quaternion z body to NED</field>
+      <field name="p" type="float" unit="rad/s">Body rate p</field>
+      <field name="q" type="float" unit="rad/s">Body rate q</field>
+      <field name="r" type="float" unit="rad/s">Body rate r</field>
     </message>
 
     <message name="SMARTPROBE" id="60" link="forwarded">
@@ -3573,6 +3699,136 @@
       <field name="data" type="uint8[]"/>
     </message>
 
+    <message name="IMCU_FALCON_SIXDOF" id="117">
+      <description>Sizdof (6 degree of freedom) pose information, specifically the pose of the Sixdof sensor with respect to the map (Frame cable front X: forward, Z: left, Y: down)</description>
+      <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the sensor with respect to the map</field>
+      <field name="quat" type="float[4]">Orientation as a quaternion of the sensor with respect to the map(qw, qx, qy, qz)</field>
+      <field name="pos_var" type="float[3]" unit="m^2">Variance of the position (var_x, var_y, var_z) in meters squared</field>
+      <field name="quat_var" type="float[3]" unit="rad^2">Variance of the orientation (var_h, var_p, var_r) in radians squared</field>
+    </message>
+
+    <message name="IMCU_FALCON_RELANGLE" id="118">
+      <description>Angle of a single beacon with respect to the sensor (Frame cable front X: forward, Z: left, Y: down)</description>
+      <field name="id" type="uint16">Unique id of the beacon</field>
+      <field name="angles" type="float[2]" unit="rad">Angular offset in the x- and z-axis in radians</field>
+      <field name="intensity" type="float">Light intensity of the beacon, this can be used to roughly indicate distance</field>
+      <field name="width" type="float" unit="pixels">Width of the detected peak in pixels, also useful for indicating distance</field>
+    </message>
+
+    <message name="IMCU_FALCON_RELBEACON" id="119">
+      <description>Relative position of a single beacon with respect to the sensor frame (Frame cable front X: forward, Z: left, Y: down)</description>
+      <field name="id" type="uint16">Unique id of the beacon</field>
+      <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the beacon with respect to the sensor frame</field>
+    </message>
+
+    <message name="IMCU_OPENCV_ARUCO" id="120">
+      <description>Relative position of a single aruco marker with respect to the camera frame</description>
+      <field name="timestamp" type="uint32" unit="ms">Timestamp of the aruco detection</field>
+      <field name="id" type="uint16">Unique id of the beacon</field>
+      <field name="pos" type="float[3]" unit="m">Position (x, y, z) in meters of the aruco with respect to the NED frame</field>
+      <field name="body_to_ned" type="float[4]">Body to NED frame quaternion</field>
+    </message>
+
+    <message name="IMCU_FALCON_CMD" id="121">
+      <description>Command to the Falcon sensor</description>
+      <field name="mode" type="uint8" values="OFF|SIXDOF|RELANGLE|RELBEACON"/>
+    </message>
+
+    <message name="IMCU_REQUEST_PATH_COEFF" id="122">
+      <description>Request path coefficients for landing</description>
+      <field name="timestamp_request" type="uint32" unit="ms">tow of path request</field>
+      <field name="coeffs_ship_prediction" type="float[24]">Ship speed prediction coefficients</field>
+      <field name="init_NED_path_pos" type="float[3]">Trajectory starting position in NED</field>
+      <field name="init_NED_path_speed" type="float[3]">Trajectory starting speed in NED</field>
+      <field name="init_NED_path_acc" type="float[3]">Trajectory starting acc in NED</field>
+      <field name="psi_ship_rad" type="float">Current ship heading in radiants</field>
+      <field name="P0_ship_NED" type="float[3]">Current ship heading in radiants</field>
+      <field name="time_delay_prediction" type="float">Ship prediction delay</field>
+    </message>
+
+    <message name="IMCU_LANDING_PATH_SETTINGS" id="123">
+      <description>Extra parameters for the landing algorithm</description>
+      <field name="min_time_landing" type="float" unit="s">Minimum time for landing</field>
+      <field name="max_time_landing" type="float" unit="s">Maximum time for landing</field>
+      <field name="landing_time_resolution" type="float" unit="s">Resolution of the landing time</field>
+      <field name="V_bound_max_control" type="float[3]" unit="m/s">Upper speed bounds for the trajectory generation in the control RF</field>
+      <field name="V_bound_min_control" type="float[3]" unit="m/s">Lower speed bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_max_control" type="float[3]" unit="m/s^2">Upper acc bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_min_control" type="float[3]" unit="m/s^2">Lower acc bounds for the trajectory generation in the control RF</field>
+      <field name="num_points" type="uint16">Number of points where the speed and acc boundaries are checked</field>
+    </message>
+
+    <message name="IMCU_RETURN_PATH_COEFF" id="124">
+      <description>Output of the landing trajectory algorithm</description>
+      <field name="runtime_path_evaluation_ms" type="uint16" unit="ms">time needed to compute the landing path</field>
+      <field name="exitflag" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
+      <field name="expected_landing_time" type="float" unit="s">Expected landing time in seconds</field>
+      <field name="coeffs_landing_path" type="float[18]">Landing path coefficients</field>
+      <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
+      <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
+    </message>
+
+    <message name="IMCU_LANDING_ALGORITHM_PARAMS" id="125">
+      <description>Parameters for the landing algorithm</description>
+      <!-- Line approach params -->
+      <field name="PH_offset_ship_ctr" type="float[3]" unit="m">Offset of the PH waypoint in the ship control reference frame</field>
+      <field name="line_approach_speed" type="float" unit="m/s">Line approach speed in m/s</field>
+      <field name="approach_line_angle_rad" type="float">Angle with respect to the ship stern where the approach will be started</field>
+      <field name="dist_line_gain" type="float">Distance line gain</field>
+      <field name="max_line_gain" type="float">Maximum line gain</field>
+      <field name="vel_gain_approach" type="float[3]"> velocity gain of the approach landing phase</field>
+      <!-- PH hovering params -->
+      <field name="pos_gain_hovering" type="float[3]"> position gain of the hovering landing phase</field>
+      <field name="vel_gain_hovering" type="float[3]"> velocity gain of the hovering landing phase</field>
+      <field name="hovering_engage_dist" type="float">Euclidean distance for engagement of the PH hovering mode</field>
+      <!-- Trajectory planning params -->
+      <field name="min_time_landing" type="float" unit="s">Minimum time for landing</field>
+      <field name="max_time_landing" type="float" unit="s">Maximum time for landing</field>
+      <field name="landing_time_resolution" type="float" unit="s">Resolution of the landing time</field>
+      <field name="V_bound_max_control" type="float[3]" unit="m/s">Upper speed bounds for the trajectory generation in the control RF</field>
+      <field name="V_bound_min_control" type="float[3]" unit="m/s">Lower speed bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_max_control" type="float[3]" unit="m/s^2">Upper acc bounds for the trajectory generation in the control RF</field>
+      <field name="A_bound_min_control" type="float[3]" unit="m/s^2">Lower acc bounds for the trajectory generation in the control RF</field>
+      <field name="num_points" type="uint16">Number of points where the speed and acc boundaries are checked</field>
+      <field name="pos_gain_trajectory" type="float[3]"> position gain of the trajectory landing phase</field>
+      <field name="vel_gain_trajectory" type="float[3]"> velocity gain of the trajectory landing phase</field>
+      <!-- Flare params -->
+      <field name="flare_engage_height" type="float">Engaging height for the flare manoeuvre</field>
+      <field name="flare_vertical_speed" type="float">Vertical speed of the flare manoeuvre</field>
+      <field name="pos_gain_flare" type="float[3]"> position gain of the flare landing phase</field>
+      <field name="vel_gain_flare" type="float[3]"> velocity gain of the flare landing phase</field>
+    </message>
+
+    <message name="IMCU_LANDING_ALGORITHM_STATES" id="126">
+      <description>States for the landing algorithm</description>
+      <field name="timestamp_states" type="uint32" unit="ms">tow of states</field>
+      <field name="P0_UAV_NED" type="float[3]" unit="m">Current UAV position in NED frame</field>
+      <field name="V0_UAV_NED" type="float[3]" unit="m/s">Current UAV speed in NED frame</field>
+      <field name="P0_SHIP_NED" type="float[3]" unit="m">Current SHIP position in NED frame</field>
+      <field name="V0_SHIP_NED" type="float[3]" unit="m/s">Current SHIP speed in NED frame</field>
+      <field name="V0_SHIP_NED_filt" type="float[3]" unit="m/s">Filtered SHIP speed in NED frame</field>
+      <field name="SHIP_att_rad" type="float[3]" unit="rad">SHIP attitude in radiants</field>
+      <field name="UAV_psi_rad" type="float" unit="rad">UAV psi angle in radiants</field>
+      <field name="coeffs_ship_prediction" type="float[24]">Ship speed prediction coefficients</field>
+      <field name="t_delay_ship_prediction_seconds" type="float">Time delay of ship predictions in seconds</field>
+    </message>
+
+    <message name="IMCU_LANDING_ALGORITHM_OUTPUT" id="127">
+      <description>Landing algorithm output</description>
+      <field name="timestamp_output" type="uint32" unit="ms">tow of computation</field>
+      <field name="UAV_acc_target_NED" type="float[3]" unit="m/s">Target acceleration vector</field>
+      <field name="UAV_desired_phi_theta_rad" type="float[2]">Desired UAV phi and theta</field>
+      <field name="landing_algorithm_mode" type="int8">Landing algorithm mode</field>
+      <field name="exitflag_path_planner" type="int8" >Exitflag of the landing algorithm (1 means a feasible path was found)</field>
+      <field name="expected_landing_time" type="float" unit="s">Expected landing time</field>
+      <field name="V_out_of_bounds_array" type="uint8[6]">Array containing the elements of speed that were out of bounds on the generated path</field>
+      <field name="A_out_of_bounds_array" type="uint8[6]">Array containing the elements of acc that were out of bounds on the generated path</field>
+    </message>
+
+    <message name="IMCU_ARUCO_ATTITUDE" id="128">
+      <field name="timestamp" type="uint32" unit="ms">Timestamp of the attitude</field>
+      <field name="body_to_ned" type="float[4]">Body to NED frame quaternion</field>
+    </message>
   </msg_class>
 
 </protocol>
