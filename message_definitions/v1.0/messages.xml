@@ -60,7 +60,15 @@
       <field name="theta" type="float" unit="rad" alt_unit="deg"/>
     </message>
 
-    <!-- 7 is free-->
+    <message name="TARGET_POS_KALMAN_DEBUG" id="7">
+      <field name="step" type="char[]">Update or Predict step</field>
+      <field name="state_in" type="float[6]">State vector before the step</field>
+      <field name="state_out" type="float[6]">State vector after the step</field>
+      <field name="cov" type="float[36]">Covariance matrix after step</field>
+      <field name="Hmat" type="float[6]">H matrix used in the update step</field>
+      <!-- <field name="noise" type="float[6]">Noise vector used in the update step</field> -->
+      <field name="meas" type="float[6]">Measurement vector used in the update step</field>
+    </message>
 
     <message name="GPS" id="8">
       <field name="mode"       type="uint8"  unit="byte_mask"/>
