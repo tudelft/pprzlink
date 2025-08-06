@@ -2115,9 +2115,9 @@
       <field name="gr" type="float" unit="rad/s"/>
     </message>
 
-  <!-- Do we need this? Used only in misc/log_parser/09_05_13__14_38_13.log -->
-    <message name="IMU_PRESSURE" id="210">
-      <field name="p" type="float" unit="pascal"/>
+    <message name="HX711" id="210">
+      <field name="freq" type="float" unit="Hz">Frequency of the HX711</field>
+      <field name="meas" type="float[]">HX711 measurement</field>
     </message>
 
     <message name="WINDTUNNEL_MEAS" id="211">
