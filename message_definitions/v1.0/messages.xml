@@ -60,7 +60,10 @@
       <field name="theta" type="float" unit="rad" alt_unit="deg"/>
     </message>
 
-    <!-- 7 is free-->
+    <message name="EKF_HIGHSPEED_LOG" id="7">
+      <field name="func" type="char[]">Which function is got called</field>
+      <field name="time_elapsed" type="uint32" unit="usec">Time since this function was last called</field>
+    </message>
 
     <message name="GPS" id="8">
       <field name="mode"       type="uint8"  unit="byte_mask"/>
