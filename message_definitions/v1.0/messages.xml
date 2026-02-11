@@ -2050,7 +2050,10 @@
       <field name="commands" type="int32[]">Commands send to actuators</field>
     </message>
 
-    <!-- 212 is free -->
+    <message name="HX711" id="210">
+      <field name="freq" type="float" unit="Hz">Frequency of the HX711</field>
+      <field name="meas" type="float[]">HX711 measurement</field>
+    </message>
 
     <message name="TUNE_VERT" id="213">
       <field name="z_sp"      type="int32" alt_unit="m"    alt_unit_coef="0.0039063"/>
