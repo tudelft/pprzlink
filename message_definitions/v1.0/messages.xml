@@ -2050,7 +2050,7 @@
       <field name="commands" type="int32[]">Commands send to actuators</field>
     </message>
 
-    <message name="HX711" id="210">
+    <message name="HX711" id="212">
       <field name="freq" type="float" unit="Hz">Frequency of the HX711</field>
       <field name="meas" type="float[]">HX711 measurement</field>
     </message>
