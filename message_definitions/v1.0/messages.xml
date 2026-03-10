@@ -60,7 +60,7 @@
       <field name="theta" type="float" unit="rad" alt_unit="deg"/>
     </message>
 
-    <message name="REMOTE_SENSING_AM" id="192">
+    <message name="REMOTE_SENSING_AM" id="7">
       <field name="target_pos_tow"     type="uint32"> Time of receiption of a ground station packet</field>
       <field name="target_pos_vel_NED" type="float[3]" unit="m/s"> ground station speed in NED frame</field>
       <field name="target_pos_NED"     type="float[3]" unit="m"> ground station position in NED frame</field>
