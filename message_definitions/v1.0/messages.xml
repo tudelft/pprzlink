@@ -2050,10 +2050,7 @@
       <field name="commands" type="int32[]">Commands send to actuators</field>
     </message>
 
-    <message name="HX711" id="212">
-      <field name="freq" type="float" unit="Hz">Frequency of the HX711</field>
-      <field name="meas" type="float[]">HX711 measurement</field>
-    </message>
+    <!-- 212 is free -->
 
     <message name="TUNE_VERT" id="213">
       <field name="z_sp"      type="int32" alt_unit="m"    alt_unit_coef="0.0039063"/>
@@ -2418,7 +2415,6 @@
       <field name="spec_thrust_down" type="float" unit="N">Specific thrust down</field>
       <field name="accel_filt_down" type="float" unit="m/s^2">Filtered vertical acceleration</field>
       <field name="agl_dist_filt" type="float" unit="m">Filtered AGL distance</field>
-      <field name="hx711" type="uint8" values="FALSE|TRUE">Whether the hx711 module detects ground (strain gauges)</field>
       <field name="triggers" type="uint16">Bitmask containing status information on the different ground detect triggers</field>
     </message>
 
